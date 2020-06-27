@@ -1,19 +1,32 @@
-#include <cassert>
+#include <iostream>
 
+#include "Alcohol.hpp"
 #include "Cargo.hpp"
-#include "Ship.hpp"
+#include "Fruit.hpp"
 
 int main() {
-    Ship ship1;
-    Ship ship2(10, 100, 500);
-    Ship ship3(10, "Ala", 200, 600, 300);
+    Alcohol alcohol{"bushmills", 8, 240, 68};
+    Fruit fruit{"truskawka", 15, 7, 2, 5};
 
-    ship1 += 15;
-    ship2 -= 40;
+    const Cargo& lhs = alcohol;
+    const Cargo& rhs = fruit;
 
-    Cargo flowerCargo{"Tulipan", 7, 50}, fruitCargo{"Truskawka", 5, 40};
+    if (lhs == rhs) {
+        std::cout << "the same\n";
+    } else {
+        std::cout << "different\n";
+    }
 
-    assert(flowerCargo != fruitCargo);
+    // const Cargo* pRHS = new Alcohol("wodka", 4, 35, 42);
+    const Cargo* pRHS = new Alcohol("bushmills", 8, 240, 68);
+
+    if (lhs == *pRHS) {
+        std::cout << "the same\n";
+    } else {
+        std::cout << "different\n";
+    }
+
+    delete pRHS;
 
     return 0;
 }
